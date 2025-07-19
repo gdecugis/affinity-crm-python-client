@@ -317,11 +317,40 @@ class AffinityClient:
 
     # ---------- Fields ----------
 
-    def list_fields(self):
-        return self._request("GET", "/fields")
+    def list_fields(self, list_id: int = None, page_size: int = 50, page_token: str = None):
+        """
+        List fields with optional filtering and pagination.
+        
+        Args:
+            list_id: Filter by list ID
+            page_size: Number of results per page (default: 50)
+            page_token: Token for pagination
+        """
+        params = {"page_size": page_size}
+        if page_token:
+            params["page_token"] = page_token
+        if list_id:
+            params["list_id"] = list_id
+        return self._request("GET", "/fields", params=params)
 
     def get_field(self, field_id: int):
         return self._request("GET", f"/fields/{field_id}")
+
+    def list_field_values(self, field_id: int = None, page_size: int = 50, page_token: str = None):
+        """
+        List field values with optional filtering and pagination.
+        
+        Args:
+            field_id: Filter by specific field ID
+            page_size: Number of results per page (default: 50)
+            page_token: Token for pagination
+        """
+        params = {"page_size": page_size}
+        if page_token:
+            params["page_token"] = page_token
+        if field_id:
+            params["field_id"] = field_id
+        return self._request("GET", "/field-values", params=params)
 
     # ---------- Utility ----------
 

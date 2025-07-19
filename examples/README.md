@@ -57,6 +57,66 @@ To search for a different domain, modify the `TARGET_DOMAIN` variable in the scr
 TARGET_DOMAIN = "your-target-domain.com"
 ```
 
+### list_fields.py
+
+This script demonstrates how to:
+- Retrieve all fields for a specific list
+- Display detailed field information including types, requirements, and properties
+- Show dropdown options and their metadata for the first field in the list
+
+#### Usage
+
+```bash
+python examples/list_fields.py
+```
+
+#### How it works
+
+1. **List Details**: Gets list information using `client.get_list(list_id)` to retrieve list name and description
+2. **Field Retrieval**: Uses `client.list_fields(list_id=LIST_ID)` to get all fields for the specified list
+3. **Field Analysis**: Displays comprehensive field information including:
+   - Field name, ID, and type
+   - Required/optional status
+   - Type-specific properties (dropdown options, number ranges, etc.)
+4. **Dropdown Options**: Shows all possible values for the first field with their metadata (ID, text, rank, color)
+
+#### Example Output
+
+```
+📋 List: Deal Pipeline (ID: 263367)
+   📝 Description: Active deals in our pipeline
+
+📊 Found 15 fields for list 263367:
+
+   1. Status
+      🆔 ID: 4707433
+      📝 Type: dropdown
+      🟢 Optional
+      📋 Options: Identified, Qualified, Study, Partners Meeting, Term Sheet, Portfolio Company, To Be Dropped, Dropped, Lost, To Contact Again
+
+🔍 Getting all possible values for the first field: Status (ID: 4707433)
+
+📋 Found 10 possible values for field 'Status':
+
+   1. Identified
+      🆔 Option ID: 19697139
+      📊 Rank: 1
+      🎨 Color: 1
+
+   2. Qualified
+      🆔 Option ID: 19697146
+      📊 Rank: 2
+      🎨 Color: 2
+```
+
+#### Customization
+
+To analyze a different list, modify the `LIST_ID` variable in the script:
+
+```python
+LIST_ID = 123456  # Replace with your target list ID
+```
+
 ## Environment Setup
 
 The examples use environment variables for secure API key management:
@@ -75,7 +135,8 @@ The examples use environment variables for secure API key management:
 
 ## Notes
 
-- The script requires an Affinity API key with appropriate permissions
+- The scripts require an Affinity API key with appropriate permissions
 - Domain search is case-sensitive and exact match
-- The script will show all opportunities associated with organizations matching the domain
+- The `opportunities_for_domain.py` script will show all opportunities associated with organizations matching the domain
+- The `list_fields.py` script provides comprehensive field analysis useful for understanding list structure and available options
 - Make sure your `.env` file is in the project root directory 
