@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: affinity-crm-python-client
+Version: 0.1.0
+Summary: Unofficial Python client for the Affinity CRM v1 API
+Home-page: https://github.com/yourusername/affinity-crm-python-client
+Author: Guillaume Decugis
+Author-email: your.email@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Requires-Dist: requests
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: responses; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
