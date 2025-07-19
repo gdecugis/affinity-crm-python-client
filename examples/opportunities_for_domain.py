@@ -22,20 +22,34 @@ try:
             org_id = org["id"]
             print(f"   📋 Organization: {org['name']} (ID: {org_id})")
             
-            opp_count = 0
-            
-            opp_result = client.search_opportunities(org['name'])
-            opportunities = opp_result.get("opportunities", [])
-            
-            for opp in opportunities:
-                if org_id in opp.get("organization_ids", []):
-                    opp_count += 1
-                    print(f"      💼 {opp['name']} (ID: {opp['id']})")
-            
-            if opp_count == 0:
-                print(f"      📝 No opportunities found for this organization")
-            else:
-                print(f"      📊 Total opportunities: {opp_count}")
+            # Get the full organization details with opportunities included
+            try:
+                full_org = client.get_organization(org_id, with_opportunities=True)
+                opportunity_ids = full_org.get("opportunity_ids", [])
+                
+                if opportunity_ids:
+                    print(f"   🔍 Found {len(opportunity_ids)} associated opportunity ID(s)")
+                    
+                    # The opportunities are already included in the response
+                    opportunities = full_org.get("opportunities", [])
+                    if opportunities:
+                        for opportunity in opportunities:
+                            print(f"      💼 {opportunity['name']} (ID: {opportunity['id']})")
+                    else:
+                        # Fallback: fetch opportunities individually if not included
+                        for opp_id in opportunity_ids:
+                            try:
+                                opportunity = client.get_opportunity(opp_id)
+                                print(f"      💼 {opportunity['name']} (ID: {opp_id})")
+                            except Exception as e:
+                                print(f"      ❌ Error retrieving opportunity {opp_id}: {e}")
+                    
+                    print(f"   📊 Total opportunities: {len(opportunity_ids)}")
+                else:
+                    print(f"   📝 No opportunities found for this organization")
+                    
+            except Exception as e:
+                print(f"   ❌ Error retrieving organization details: {e}")
                 
     else:
         print(f"❌ No organizations found with domain '{TARGET_DOMAIN}'")

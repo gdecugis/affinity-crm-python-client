@@ -54,6 +54,61 @@ def test_list_list_entries():
     assert len(result["list_entries"]) == 2
 
 @responses.activate
+def test_list_list_entries_with_person_id():
+    responses.add(
+        responses.GET,
+        "https://api.affinity.co/lists/101/list-entries?page_size=50&person_id=789",
+        json={"list_entries": [{"id": 1, "entity_id": 789}], "next_page_token": None},
+        status=200,
+    )
+    client = AffinityClient(api_key="test")
+    result = client.list_list_entries(101, person_id=789)
+    assert "list_entries" in result
+    assert len(result["list_entries"]) == 1
+    assert result["list_entries"][0]["entity_id"] == 789
+
+@responses.activate
+def test_list_list_entries_with_organization_id():
+    responses.add(
+        responses.GET,
+        "https://api.affinity.co/lists/101/list-entries?page_size=50&organization_id=456",
+        json={"list_entries": [{"id": 1, "entity_id": 456}], "next_page_token": None},
+        status=200,
+    )
+    client = AffinityClient(api_key="test")
+    result = client.list_list_entries(101, organization_id=456)
+    assert "list_entries" in result
+    assert len(result["list_entries"]) == 1
+    assert result["list_entries"][0]["entity_id"] == 456
+
+@responses.activate
+def test_list_list_entries_with_opportunity_id():
+    responses.add(
+        responses.GET,
+        "https://api.affinity.co/lists/101/list-entries?page_size=50&opportunity_id=123",
+        json={"list_entries": [{"id": 1, "entity_id": 123}], "next_page_token": None},
+        status=200,
+    )
+    client = AffinityClient(api_key="test")
+    result = client.list_list_entries(101, opportunity_id=123)
+    assert "list_entries" in result
+    assert len(result["list_entries"]) == 1
+    assert result["list_entries"][0]["entity_id"] == 123
+
+@responses.activate
+def test_list_list_entries_with_multiple_filters():
+    responses.add(
+        responses.GET,
+        "https://api.affinity.co/lists/101/list-entries?page_size=50&person_id=789&organization_id=456",
+        json={"list_entries": [{"id": 1, "entity_id": 789}], "next_page_token": None},
+        status=200,
+    )
+    client = AffinityClient(api_key="test")
+    result = client.list_list_entries(101, person_id=789, organization_id=456)
+    assert "list_entries" in result
+    assert len(result["list_entries"]) == 1
+
+@responses.activate
 def test_list_all_list_entries():
     responses.add(
         responses.GET,
