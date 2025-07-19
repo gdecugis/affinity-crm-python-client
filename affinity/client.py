@@ -42,6 +42,15 @@ class AffinityClient:
             if not token:
                 break
 
+    def create_person(self, data: dict):
+        return self._request("POST", "/persons", data=data)
+
+    def update_person(self, person_id: int, data: dict):
+        return self._request("PATCH", f"/persons/{person_id}", data=data)
+
+    def delete_person(self, person_id: int):
+        return self._request("DELETE", f"/persons/{person_id}")
+
     # ---------- Organizations ----------
 
     def get_organization(self, org_id: int):
@@ -63,6 +72,15 @@ class AffinityClient:
             if not token:
                 break
 
+    def create_organization(self, data: dict):
+        return self._request("POST", "/organizations", data=data)
+
+    def update_organization(self, org_id: int, data: dict):
+        return self._request("PATCH", f"/organizations/{org_id}", data=data)
+
+    def delete_organization(self, org_id: int):
+        return self._request("DELETE", f"/organizations/{org_id}")
+
     # ---------- Opportunities ----------
 
     def get_opportunity(self, opp_id: int):
@@ -83,6 +101,15 @@ class AffinityClient:
             token = data.get("next_page_token")
             if not token:
                 break
+
+    def create_opportunity(self, data: dict):
+        return self._request("POST", "/opportunities", data=data)
+
+    def update_opportunity(self, opp_id: int, data: dict):
+        return self._request("PATCH", f"/opportunities/{opp_id}", data=data)
+
+    def delete_opportunity(self, opp_id: int):
+        return self._request("DELETE", f"/opportunities/{opp_id}")
 
     # ---------- Lists ----------
 
@@ -112,6 +139,15 @@ class AffinityClient:
             token = data.get("next_page_token")
             if not token:
                 break
+
+    def add_list_entry(self, list_id: int, data: dict):
+        return self._request("POST", f"/lists/{list_id}/list-entries", data=data)
+
+    def delete_list_entry(self, entry_id: int):
+        return self._request("DELETE", f"/list-entries/{entry_id}")
+
+    def update_field_values(self, list_id: int, entry_id: int, values: list):
+        return self._request("PATCH", f"/lists/{list_id}/list-entries/{entry_id}/field-values", data={"values": values})
 
     # ---------- Fields ----------
 
