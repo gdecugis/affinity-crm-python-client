@@ -28,6 +28,36 @@ def test_list_organizations():
     assert len(result["organizations"]) == 2
 
 @responses.activate
+def test_list_organizations_with_term():
+    responses.add(
+        responses.GET,
+        "https://api.affinity.co/organizations?term=affinity",
+        json={"organizations": [{"id": 123, "name": "Affinity Inc"}], "next_page_token": None},
+        status=200,
+    )
+    client = AffinityClient(api_key="test")
+    result = client.list_organizations(term="affinity")
+    assert "organizations" in result
+    assert len(result["organizations"]) == 1
+    assert result["organizations"][0]["name"] == "Affinity Inc"
+
+@responses.activate
+def test_search_organizations():
+    responses.add(
+        responses.GET,
+        "https://api.affinity.co/organizations?term=example.com",
+        json={"organizations": [{"id": 123, "name": "Example Corp", "domain": "example.com"}]},
+        status=200,
+    )
+    client = AffinityClient(api_key="test")
+    result = client.search_organizations("example.com")
+    assert "organizations" in result
+    assert len(result["organizations"]) == 1
+    assert result["organizations"][0]["id"] == 123
+    assert result["organizations"][0]["name"] == "Example Corp"
+    assert result["organizations"][0]["domain"] == "example.com"
+
+@responses.activate
 def test_list_all_organizations():
     responses.add(
         responses.GET,

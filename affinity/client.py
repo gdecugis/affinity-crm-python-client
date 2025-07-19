@@ -26,11 +26,17 @@ class AffinityClient:
     def get_person(self, person_id: int):
         return self._request("GET", f"/persons/{person_id}")
 
-    def list_persons(self, page_size: int = 50, page_token: str = None):
+    def list_persons(self, page_size: int = 50, page_token: str = None, term: str = None):
         params = {"page_size": page_size}
         if page_token:
             params["page_token"] = page_token
+        if term:
+            params["term"] = term
         return self._request("GET", "/persons", params=params)
+
+    def search_persons(self, term: str, page_size: int = 50, page_token: str = None):
+        """Search for persons by term (name, email, etc.)."""
+        return self.list_persons(page_size=page_size, page_token=page_token, term=term)
 
     def list_all_persons(self, page_size: int = 50):
         token = None
@@ -56,11 +62,17 @@ class AffinityClient:
     def get_organization(self, org_id: int):
         return self._request("GET", f"/organizations/{org_id}")
 
-    def list_organizations(self, page_size: int = 50, page_token: str = None):
+    def list_organizations(self, page_size: int = 50, page_token: str = None, term: str = None):
         params = {"page_size": page_size}
         if page_token:
             params["page_token"] = page_token
+        if term:
+            params["term"] = term
         return self._request("GET", "/organizations", params=params)
+
+    def search_organizations(self, term: str, page_size: int = 50, page_token: str = None):
+        """Search for organizations by term (name, domain, etc.)."""
+        return self.list_organizations(page_size=page_size, page_token=page_token, term=term)
 
     def list_all_organizations(self, page_size: int = 50):
         token = None
@@ -86,11 +98,17 @@ class AffinityClient:
     def get_opportunity(self, opp_id: int):
         return self._request("GET", f"/opportunities/{opp_id}")
 
-    def list_opportunities(self, page_size: int = 50, page_token: str = None):
+    def list_opportunities(self, page_size: int = 50, page_token: str = None, term: str = None):
         params = {"page_size": page_size}
         if page_token:
             params["page_token"] = page_token
+        if term:
+            params["term"] = term
         return self._request("GET", "/opportunities", params=params)
+
+    def search_opportunities(self, term: str, page_size: int = 50, page_token: str = None):
+        """Search for opportunities by term (name, etc.)."""
+        return self.list_opportunities(page_size=page_size, page_token=page_token, term=term)
 
     def list_all_opportunities(self, page_size: int = 50):
         token = None
