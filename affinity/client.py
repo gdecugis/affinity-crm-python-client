@@ -312,8 +312,49 @@ class AffinityClient:
     def delete_list_entry(self, entry_id: int):
         return self._request("DELETE", f"/list-entries/{entry_id}")
 
-    def update_field_values(self, list_id: int, entry_id: int, values: list):
-        return self._request("PATCH", f"/lists/{list_id}/list-entries/{entry_id}/field-values", data={"values": values})
+    def create_field_value(self, field_id: int, value, entity_id: int, list_entry_id: int = None):
+        data = {
+            "field_id": field_id,
+            "value": value,
+            "entity_id": entity_id
+        }
+        if list_entry_id:
+            data["list_entry_id"] = list_entry_id
+        return self._request("POST", "/field-values", data=data)
+
+    def update_field_value(self, field_value_id: int, value):
+        data = {"value": value}
+        return self._request("PUT", f"/field-values/{field_value_id}", data=data)
+
+    def set_field_value(self, field_id: int, value, entity_id: int, list_entry_id: int = None):
+        """
+        Smart method that either creates or updates a field value.
+        First checks if a field value exists, then creates or updates accordingly.
+        
+        Args:
+            field_id: The field ID
+            value: The field value
+            entity_id: The entity ID
+            list_entry_id: The list entry ID (optional but often required)
+        """
+        # First, try to get existing field values for this entity and field
+        try:
+            field_values = self.list_field_values(field_id=field_id)
+            existing_values = [fv for fv in field_values.get("field_values", []) 
+                             if fv.get("entity_id") == entity_id]
+            
+            if existing_values:
+                # Update existing field value
+                field_value_id = existing_values[0]["id"]
+                return self.update_field_value(field_value_id, value)
+            else:
+                # Create new field value
+                return self.create_field_value(field_id, value, entity_id, list_entry_id)
+                
+        except Exception as e:
+            # If we can't determine existing values, just try to create
+            return self.create_field_value(field_id, value, entity_id, list_entry_id)
+
 
     # ---------- Fields ----------
 

@@ -117,6 +117,94 @@ To analyze a different list, modify the `LIST_ID` variable in the script:
 LIST_ID = 123456  # Replace with your target list ID
 ```
 
+### create_opportunity_workflow.py
+
+This script demonstrates a complete workflow for:
+- Checking if an organization exists for a specific domain
+- Creating the organization if it doesn't exist and adding it to a list
+- Creating an opportunity associated with the organization
+- Setting custom field values for the opportunity with proper field type handling
+
+#### Usage
+
+```bash
+python examples/create_opportunity_workflow.py
+```
+
+#### How it works
+
+1. **Organization Check**: Uses `client.search_organizations(domain)` to check if an organization exists for the target domain
+2. **Organization Creation**: If not found, creates a new organization using `client.create_organization()` with domain and name
+3. **List Assignment**: Adds the organization to the target list using `client.add_list_entry()`
+4. **Opportunity Creation**: Creates a new opportunity using `client.create_opportunity()` with basic information
+5. **List Entry**: Adds the opportunity to the target list as a list entry
+6. **Field Values**: Sets custom field values using `client.update_field_values()` with proper field type handling:
+   - **Dropdown fields** (value_type 2, 7): Use dropdown option IDs
+   - **Person fields** (value_type 0): Use person IDs
+   - **Number fields** (value_type 3): Use numeric values
+   - **Text fields** (value_type 6): Use string values
+
+#### Example Output
+
+```
+🚀 Starting Affinity workflow for domain: example.com
+============================================================
+🔍 Checking if organization exists for domain: example.com
+❌ No organization found for domain: example.com
+🏗️  Creating new organization for domain: example.com
+✅ Created organization: Example Inc (ID: 12345)
+📋 Adding organization 12345 to list 263367
+✅ Added organization to list (Entry ID: 67890)
+💼 Creating opportunity for organization: Example Inc
+✅ Created opportunity: Investment Opportunity - Example Inc (ID: 11111)
+✅ Added opportunity to list (Entry ID: 22222)
+🔧 Setting custom field values...
+   📝 status: 19697139
+   📝 deal_owner: 194355246
+   📝 current_deal_stage: 19060786
+   📝 origination_serena: 16898335
+   📝 deal_fund: 15117961
+   📝 origin: 19268510
+   📝 fundraising_amount: 2500000
+✅ Updated 7 field values
+
+🎉 Workflow completed successfully!
+📊 Summary:
+   Organization: Example Inc (ID: 12345)
+   Opportunity: Investment Opportunity - Example Inc (ID: 11111)
+   List: 263367
+   Custom fields set: 7
+```
+
+#### Customization
+
+To customize the workflow, modify these variables in the script:
+
+```python
+TARGET_DOMAIN = "your-target-domain.com"  # Domain to check/create
+LIST_ID = 263367  # Target list ID
+
+# Field configurations - modify field IDs and values as needed
+FIELD_CONFIG = {
+    "status": {
+        "field_id": 4707433,
+        "value_type": 7,  # Dropdown
+        "value": 19697139  # "Identified" option ID
+    },
+    # ... other fields
+}
+```
+
+#### Field Value Types
+
+The script handles different field value types according to the [Affinity API documentation](https://api-docs.affinity.co/#the-field-resource):
+
+- **Type 0 (Person)**: Use person ID (e.g., `194355246`)
+- **Type 2 (Dropdown)**: Use dropdown option ID (e.g., `16898335`)
+- **Type 3 (Number)**: Use numeric value (e.g., `2500000`)
+- **Type 6 (Text)**: Use string value (e.g., `"Some text"`)
+- **Type 7 (Dropdown)**: Use dropdown option ID (e.g., `19697139`)
+
 ## Environment Setup
 
 The examples use environment variables for secure API key management:
@@ -138,5 +226,6 @@ The examples use environment variables for secure API key management:
 - The scripts require an Affinity API key with appropriate permissions
 - Domain search is case-sensitive and exact match
 - The `opportunities_for_domain.py` script will show all opportunities associated with organizations matching the domain
-- The `list_fields.py` script provides comprehensive field analysis useful for understanding list structure and available options
-- Make sure your `.env` file is in the project root directory 
+- The `create_opportunity_workflow.py` script demonstrates a complete end-to-end workflow for creating opportunities with custom fields
+- Field value types must match the field configuration in your Affinity workspace
+- List IDs and field IDs are specific to your Affinity workspace and must be obtained from your workspace 

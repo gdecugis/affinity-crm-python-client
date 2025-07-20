@@ -1,0 +1,907 @@
+[
+    {
+        "id": 4707433,
+        "name": "Status",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 7,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": [
+            {
+                "id": 19697139,
+                "text": "Identified",
+                "rank": 1,
+                "color": 1
+            },
+            {
+                "id": 19697146,
+                "text": "Qualified",
+                "rank": 2,
+                "color": 2
+            },
+            {
+                "id": 19697143,
+                "text": "Study",
+                "rank": 3,
+                "color": 2
+            },
+            {
+                "id": 19697169,
+                "text": "Partners Meeting",
+                "rank": 4,
+                "color": 2
+            },
+            {
+                "id": 19697131,
+                "text": "Term Sheet",
+                "rank": 5,
+                "color": 2
+            },
+            {
+                "id": 19697148,
+                "text": "Portfolio Company",
+                "rank": 6,
+                "color": 3
+            },
+            {
+                "id": 15117896,
+                "text": "To Be Dropped",
+                "rank": 7,
+                "color": 5
+            },
+            {
+                "id": 19755522,
+                "text": "Dropped",
+                "rank": 8,
+                "color": 6
+            },
+            {
+                "id": 19697170,
+                "text": "Lost",
+                "rank": 9,
+                "color": 6
+            },
+            {
+                "id": 15117911,
+                "text": "To Contact Again",
+                "rank": 10,
+                "color": 4
+            }
+        ]
+    },
+    {
+        "id": 4707435,
+        "name": "Deal Owner",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 0,
+        "allows_multiple": true,
+        "track_changes": true,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707434,
+        "name": "Fundraising Amount \u20ac",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 3,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707436,
+        "name": "Z_OLD_Close Date",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 4,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": []
+    },
+    {
+        "id": 4823540,
+        "name": "Deck Link",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 6,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": []
+    },
+    {
+        "id": 5000141,
+        "name": "Current Deal Stage",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 7,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": [
+            {
+                "id": 19060786,
+                "text": "Stealth",
+                "rank": 1,
+                "color": 4
+            },
+            {
+                "id": 18800393,
+                "text": "Pre-Seed",
+                "rank": 2,
+                "color": 2
+            },
+            {
+                "id": 18800394,
+                "text": "Seed",
+                "rank": 3,
+                "color": 3
+            },
+            {
+                "id": 18800957,
+                "text": "Pre-A",
+                "rank": 4,
+                "color": 0
+            },
+            {
+                "id": 18800395,
+                "text": "Series A",
+                "rank": 5,
+                "color": 4
+            },
+            {
+                "id": 18800396,
+                "text": "Series B",
+                "rank": 6,
+                "color": 5
+            },
+            {
+                "id": 18800871,
+                "text": "Series C",
+                "rank": 7,
+                "color": 6
+            },
+            {
+                "id": 18800965,
+                "text": "Series D",
+                "rank": 8,
+                "color": 0
+            },
+            {
+                "id": 18800838,
+                "text": "Unknown",
+                "rank": 9,
+                "color": 5
+            }
+        ]
+    },
+    {
+        "id": 4707474,
+        "name": "Google Drive",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 6,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707479,
+        "name": "Investment Committee",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 2,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": [
+            {
+                "id": 15117861,
+                "text": "No",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118070,
+                "text": "Yes",
+                "rank": 0,
+                "color": 0
+            }
+        ]
+    },
+    {
+        "id": 4707483,
+        "name": "Origination Serena",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 2,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": [
+            {
+                "id": 15140867,
+                "text": "Adrien Bardon",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118593,
+                "text": "Agathe Jouan De KERVENOAEL <agathe.dekervenoael@serena.vc>",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118021,
+                "text": "Agathe Terrou",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119524,
+                "text": "Alexandra Andr\u00e9",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15133690,
+                "text": "Alexandre Winter",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118388,
+                "text": "Alienor Gangloff-Fournier",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898530,
+                "text": "Alix Trebaol",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 18592039,
+                "text": "Amaury Le Moal",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118407,
+                "text": "Am\u00e9lie Faure",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117863,
+                "text": "Anne-Val\u00e9rie Bach",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119226,
+                "text": "Antoine Giacomini",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898547,
+                "text": "Bertrand Diard",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119594,
+                "text": "C\u00e9lia Benboualia",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118461,
+                "text": "Charles Rousset",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 19068841,
+                "text": "Charline Patay",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117930,
+                "text": "Cl\u00e9mence Louzier",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118142,
+                "text": "Cl\u00e9mentine Papon",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898408,
+                "text": "David Bitton",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 17379071,
+                "text": "Emilie Stevelinck Benayad",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898422,
+                "text": "Emma Guetta",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898364,
+                "text": "Eric Gossart",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118522,
+                "text": "Florent Thomas",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898352,
+                "text": "Floriane de Maupeou",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898343,
+                "text": "Gaspard Plantevin",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118039,
+                "text": "Gr\u00e9gor Cayla",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898335,
+                "text": "Guillaume Decugis",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118057,
+                "text": "Hamza Mansouri",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15141256,
+                "text": "Hugo Berthoumieux",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 19438901,
+                "text": "Hugo Segura",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118813,
+                "text": "Ines Derre",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898317,
+                "text": "Isabel Lavoura",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15121341,
+                "text": "Jamal Labed",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119512,
+                "text": "Jean-Baptiste Dumont",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118684,
+                "text": "Jean Costa De Beauregard",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119319,
+                "text": "Jean Crosetti",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898398,
+                "text": "J\u00e9r\u00f4me Stioui",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118081,
+                "text": "Joshua Ruff",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898338,
+                "text": "Juliette Ast",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117997,
+                "text": "Kamel Zeroual",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119520,
+                "text": "L\u00e9a Verdillon",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898378,
+                "text": "L\u00e9a Zaslavsky",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898332,
+                "text": "Louis Ducurtil",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898311,
+                "text": "Marc Fournier",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898355,
+                "text": "Margaux Bussi\u00e8re",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117988,
+                "text": "Marie Brayer",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117880,
+                "text": "Marion Schuppe",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898360,
+                "text": "Matthieu Lavergne",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898386,
+                "text": "Maxime Furet",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118310,
+                "text": "Mila Ruiz",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 19438900,
+                "text": "Nicolas Trancart",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898369,
+                "text": "Olivier Martret",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118719,
+                "text": "Pascal Petit",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15120123,
+                "text": "Paul Dervaux",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898367,
+                "text": "Paul Moriou",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898341,
+                "text": "Philippe Hayat",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119256,
+                "text": "Rapha\u00ebl Wat",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118063,
+                "text": "Romain Francois",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898327,
+                "text": "S\u00e9bastien Le Roy",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15136591,
+                "text": "St\u00e9phanie Nizard",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16961832,
+                "text": "Sybille Ranchon",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118007,
+                "text": "Tiphaine Venet",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15135390,
+                "text": "Victoria Dalleau",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16898334,
+                "text": "Xavier Lorphelin",
+                "rank": 0,
+                "color": 0
+            }
+        ]
+    },
+    {
+        "id": 4707484,
+        "name": "No go reasons",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 6,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707536,
+        "name": "Z_OLD_Country (SC)",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 5,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707440,
+        "name": "Deal Comments",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 6,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707461,
+        "name": "Deal Fund",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 2,
+        "allows_multiple": true,
+        "track_changes": false,
+        "dropdown_options": [
+            {
+                "id": 15118424,
+                "text": "Allianz",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118135,
+                "text": "Data Ventures I",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117961,
+                "text": "Data Ventures II",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16718973,
+                "text": "IRCEM",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117876,
+                "text": "Racine\u00b2",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119643,
+                "text": "Serena I",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15119505,
+                "text": "Serena II",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117859,
+                "text": "Serena III",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118075,
+                "text": "Serena IV",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117897,
+                "text": "V13",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 16718972,
+                "text": "V14",
+                "rank": 0,
+                "color": 0
+            }
+        ]
+    },
+    {
+        "id": 4707487,
+        "name": "Origin",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 2,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": [
+            {
+                "id": 15118143,
+                "text": "Bodacc",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117952,
+                "text": "Business Angel",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117983,
+                "text": "Content Marketing",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117866,
+                "text": "Entrepreneur",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117904,
+                "text": "Events",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117965,
+                "text": "Incubator",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117934,
+                "text": "LP",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117882,
+                "text": "M&A Boutique",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118046,
+                "text": "Other Network",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117937,
+                "text": "Outbound",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118252,
+                "text": "Portfolio Company",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118404,
+                "text": "Sales Navigator",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 19268510,
+                "text": "Serena Huntress",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15117971,
+                "text": "VC",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118131,
+                "text": "Website",
+                "rank": 0,
+                "color": 0
+            }
+        ]
+    },
+    {
+        "id": 4845712,
+        "name": "OK to Share Externally",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 7,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": [
+            {
+                "id": 17351473,
+                "text": "OK to Share",
+                "rank": 1,
+                "color": 3
+            }
+        ]
+    },
+    {
+        "id": 4819895,
+        "name": "Origination Account",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 1,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707482,
+        "name": "Origination Contact",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 0,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": []
+    },
+    {
+        "id": 4707548,
+        "name": "Z_OLD_Hit List",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 2,
+        "allows_multiple": false,
+        "track_changes": false,
+        "dropdown_options": [
+            {
+                "id": 15117871,
+                "text": "No",
+                "rank": 0,
+                "color": 0
+            },
+            {
+                "id": 15118241,
+                "text": "Yes",
+                "rank": 0,
+                "color": 0
+            }
+        ]
+    },
+    {
+        "id": 4977128,
+        "name": "Rating",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 7,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": [
+            {
+                "id": 18662521,
+                "text": "Excellent",
+                "rank": 1,
+                "color": 3
+            },
+            {
+                "id": 18662522,
+                "text": "Good",
+                "rank": 2,
+                "color": 2
+            },
+            {
+                "id": 18662523,
+                "text": "Fair",
+                "rank": 3,
+                "color": 5
+            }
+        ]
+    },
+    {
+        "id": 4707552,
+        "name": "Z_OLD_Reception Date",
+        "list_id": 263367,
+        "enrichment_source": "none",
+        "value_type": 4,
+        "allows_multiple": false,
+        "track_changes": true,
+        "dropdown_options": []
+    }
+]
