@@ -17,7 +17,7 @@ def test_create_person():
 @responses.activate
 def test_update_person():
     responses.add(
-        responses.PATCH,
+        responses.PUT,
         "https://api.affinity.co/persons/321",
         json={"id": 321, "name": "Updated Person"},
         status=200,

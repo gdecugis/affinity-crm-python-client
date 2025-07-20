@@ -9,12 +9,13 @@ setup(
     url="https://github.com/yourusername/affinity-crm-python-client",  # update after push
     packages=find_packages(exclude=["tests*"]),
     install_requires=[
-        "requests",
+        "requests>=2.25.0",
+        "python-dotenv>=0.19.0",
     ],
     extras_require={
         "dev": [
-            "pytest",
-            "responses",
+            "pytest>=6.0.0",
+            "responses>=0.13.0",
         ],
     },
     classifiers=[

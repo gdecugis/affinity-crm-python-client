@@ -17,7 +17,7 @@ def test_create_opportunity():
 @responses.activate
 def test_update_opportunity():
     responses.add(
-        responses.PATCH,
+        responses.PUT,
         "https://api.affinity.co/opportunities/123",
         json={"id": 123, "name": "Updated Opportunity"},
         status=200,

@@ -95,7 +95,7 @@ class AffinityClient:
         return self._request("POST", "/persons", data=data)
 
     def update_person(self, person_id: int, data: dict):
-        return self._request("PATCH", f"/persons/{person_id}", data=data)
+        return self._request("PUT", f"/persons/{person_id}", data=data)
 
     def delete_person(self, person_id: int):
         return self._request("DELETE", f"/persons/{person_id}")
@@ -178,7 +178,7 @@ class AffinityClient:
         return self._request("POST", "/organizations", data=data)
 
     def update_organization(self, org_id: int, data: dict):
-        return self._request("PATCH", f"/organizations/{org_id}", data=data)
+        return self._request("PUT", f"/organizations/{org_id}", data=data)
 
     def delete_organization(self, org_id: int):
         return self._request("DELETE", f"/organizations/{org_id}")
@@ -254,7 +254,7 @@ class AffinityClient:
         return self._request("POST", "/opportunities", data=data)
 
     def update_opportunity(self, opp_id: int, data: dict):
-        return self._request("PATCH", f"/opportunities/{opp_id}", data=data)
+        return self._request("PUT", f"/opportunities/{opp_id}", data=data)
 
     def delete_opportunity(self, opp_id: int):
         return self._request("DELETE", f"/opportunities/{opp_id}")

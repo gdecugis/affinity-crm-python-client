@@ -17,7 +17,7 @@ def test_create_organization():
 @responses.activate
 def test_update_organization():
     responses.add(
-        responses.PATCH,
+        responses.PUT,
         "https://api.affinity.co/organizations/789",
         json={"id": 789, "name": "Updated Organization"},
         status=200,
