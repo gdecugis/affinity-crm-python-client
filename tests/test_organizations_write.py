@@ -10,7 +10,7 @@ def test_create_organization():
         status=200,
     )
     client = AffinityClient(api_key="test")
-    result = client.create_organization({"name": "New Organization"})
+    result = client.create_organization(name="New Organization", domain=None)
     assert result["id"] == 789
     assert result["name"] == "New Organization"
 
@@ -23,7 +23,7 @@ def test_update_organization():
         status=200,
     )
     client = AffinityClient(api_key="test")
-    result = client.update_organization(789, {"name": "Updated Organization"})
+    result = client.update_organization(789, name="Updated Organization", domain=None)
     assert result["id"] == 789
     assert result["name"] == "Updated Organization"
 

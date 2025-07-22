@@ -1,0 +1,120 @@
+resource,method,path,parameter,parameter_type,location,parameter_description
+Lists,GET,/lists,,,,
+Lists,POST,/lists,name,string,payload,The title of the list that is displayed in Affinity.
+Lists,POST,/lists,type,integer,payload,"Type of the list (e.g., People = 0, Organizations = 1, Opportunities = 2)."
+Lists,POST,/lists,is_public,boolean,payload,Whether the list is publicly visible within the workspace.
+Lists,POST,/lists,owner_id,integer,payload (optional),User ID of the owner of the list.
+Lists,POST,/lists,additional_permissions,object[],payload (optional),Permissions to assign to other users or groups.
+Lists,GET,/lists/{list_id},list_id,integer,path,ID of the list the resource belongs to.
+Lists,GET,/lists/{list_id}/list-entries,list_id,integer,path,ID of the list the resource belongs to.
+Lists,GET,/lists/{list_id}/list-entries,page_size,integer,query (optional),Number of results per page for paginated endpoints.
+Lists,GET,/lists/{list_id}/list-entries,page_token,string,query (optional),Token for paginated results to retrieve the next page.
+Lists,POST,/lists/{list_id}/list-entries,list_id,integer,path,ID of the list the resource belongs to.
+Lists,POST,/lists/{list_id}/list-entries,entity_id,integer,payload,"ID of the entity (person, organization, etc.) associated with the resource."
+Lists,POST,/lists/{list_id}/list-entries,creator_id,integer,payload (optional),ID of the user creating the resource.
+Lists,DELETE,/lists/{list_id}/list-entries/{list_entry_id},list_id,integer,path,ID of the list the resource belongs to.
+Lists,DELETE,/lists/{list_id}/list-entries/{list_entry_id},list_entry_id,integer,path,ID of the specific list entry.
+Fields,GET,/fields,list_id,integer,query (optional),ID of the list the resource belongs to.
+Fields,GET,/fields,value_type,integer,query (optional),The value type of the fields that are to be retrieved.
+Fields,GET,/fields,entity_type,integer,query (optional),Type of entity the resource is associated with.
+Fields,GET,/fields,with_modified_names,boolean,query (optional),"When true, field names will return in the format [List Name] Field Name."
+Fields,GET,/fields,exclude_dropdown_options,boolean,query (optional),"When true, dropdown options will not be returned in the response."
+Fields,POST,/fields,name,string,payload,The name of the field.
+Fields,POST,/fields,entity_type,integer,payload,Type of entity the resource is associated with.
+Fields,POST,/fields,value_type,integer,payload,
+Fields,POST,/fields,list_id,integer,payload (optional),ID of the list the resource belongs to.
+Fields,POST,/fields,allows_multiple,boolean,payload (optional),
+Fields,POST,/fields,is_list_specific,boolean,payload (optional),
+Fields,POST,/fields,is_required,boolean,payload (optional),
+Fields,DELETE,/fields/{id},id,integer,path,
+Field Values,GET,/field-values,person_id,integer,query (custom*),ID of the person entity.
+Field Values,GET,/field-values,organization_id,integer,query (custom*),ID of the organization entity.
+Field Values,GET,/field-values,opportunity_id,integer,query (custom*),ID of the opportunity entity.
+Field Values,GET,/field-values,list_entry_id,integer,query (custom*),ID of the specific list entry.
+Field Values,POST,/field-values,field_id,integer,payload,ID of the custom field.
+Field Values,POST,/field-values,entity_id,integer,payload,"ID of the entity (person, organization, etc.) associated with the resource."
+Field Values,POST,/field-values,value,custom,payload,Value to assign to the field. Type depends on value_type.
+Field Values,POST,/field-values,list_entry_id,integer,payload (optional),ID of the specific list entry.
+Field Values,PUT,/field-values/{field_value_id},field_value_id,integer,path,ID of the specific field value.
+Field Values,PUT,/field-values/{field_value_id},value,custom,payload,Value to assign to the field. Type depends on value_type.
+Field Values,DELETE,/field-values/{field_value_id},field_value_id,integer,path,ID of the specific field value.
+Field Value Changes,GET,/field-value-changes,field_id,integer,query,ID of the custom field.
+Field Value Changes,GET,/field-value-changes,action_type,integer,query (optional),"Type of field value change (e.g., 1 = added, 2 = removed)."
+Field Value Changes,GET,/field-value-changes,person_id,integer,query (custom*),ID of the person entity.
+Field Value Changes,GET,/field-value-changes,organization_id,integer,query (custom*),ID of the organization entity.
+Field Value Changes,GET,/field-value-changes,opportunity_id,integer,query (custom*),ID of the opportunity entity.
+Field Value Changes,GET,/field-value-changes,list_entry_id,integer,query (custom*),ID of the specific list entry.
+Persons,GET,/persons,term,string,query (optional),Search term to filter results by name or email.
+Persons,GET,/persons,with_interaction_dates,boolean,query (optional),Whether to include interaction dates.
+Persons,GET,/persons,with_interaction_persons,boolean,query (optional),Whether to include persons involved in interactions.
+Persons,GET,/persons,with_opportunities,boolean,query (optional),Whether to include related opportunities.
+Persons,GET,/persons,with_current_organizations,boolean,query (optional),Whether to include current organization relationships.
+Persons,GET,/persons,min_{interaction_type}_date,string,query (optional),
+Persons,GET,/persons,max_{interaction_type}_date,string,query (optional),
+Persons,GET,/persons,page_size,number,query (optional),Number of results per page for paginated endpoints.
+Persons,GET,/persons,page_token,string,query (optional),Token for paginated results to retrieve the next page.
+Persons,GET,/persons/{person_id},person_id,integer,path,ID of the person entity.
+Persons,GET,/persons/{person_id},with_interaction_dates,boolean,query (optional),Whether to include interaction dates.
+Persons,GET,/persons/{person_id},with_interaction_persons,boolean,query (optional),Whether to include persons involved in interactions.
+Persons,GET,/persons/{person_id},with_opportunities,boolean,query (optional),Whether to include related opportunities.
+Persons,GET,/persons/{person_id},with_current_organizations,boolean,query (optional),Whether to include current organization relationships.
+Persons,POST,/persons,first_name,string,payload,First name of the person.
+Persons,POST,/persons,last_name,string,payload,Last name of the person.
+Persons,POST,/persons,emails,string[],payload,Array of email addresses associated with the person.
+Persons,POST,/persons,organization_ids,integer[],payload (optional),Array of organization IDs linked to the person.
+Persons,PUT,/persons/{person_id},person_id,integer,path,ID of the person entity.
+Persons,PUT,/persons/{person_id},first_name,string,payload (optional),First name of the person.
+Persons,PUT,/persons/{person_id},last_name,string,payload (optional),Last name of the person.
+Persons,PUT,/persons/{person_id},emails,string[],payload (optional),Array of email addresses associated with the person.
+Persons,PUT,/persons/{person_id},organization_ids,integer[],payload (optional),Array of organization IDs linked to the person.
+Persons,DELETE,/persons/{person_id},person_id,integer,path,ID of the person entity.
+Organizations,GET,/organizations,term,string,query (optional),Search term to filter results by name or email.
+Organizations,GET,/organizations,page_size,number,query (optional),Number of results per page for paginated endpoints.
+Organizations,GET,/organizations,page_token,string,query (optional),Token for paginated results to retrieve the next page.
+Organizations,GET,/organizations/{organization_id},organization_id,integer,path,ID of the organization entity.
+Organizations,POST,/organizations,name,string,payload,Name of the object being created or updated.
+Organizations,PUT,/organizations/{organization_id},organization_id,integer,path,ID of the organization entity.
+Organizations,PUT,/organizations/{organization_id},name,string,payload (optional),Name of the object being created or updated.
+Organizations,DELETE,/organizations/{organization_id},organization_id,integer,path,ID of the organization entity.
+Opportunities,GET,/opportunities,page_size,number,query (optional),Number of results per page for paginated endpoints.
+Opportunities,GET,/opportunities,page_token,string,query (optional),Token for paginated results to retrieve the next page.
+Opportunities,GET,/opportunities/{opportunity_id},opportunity_id,integer,path,ID of the opportunity entity.
+Opportunities,POST,/opportunities,name,string,payload,Name of the object being created or updated.
+Opportunities,POST,/opportunities,list_id,integer,payload,ID of the list the resource belongs to.
+Opportunities,POST,/opportunities,entity_id,integer,payload,"ID of the entity (person, organization, etc.) associated with the resource."
+Opportunities,PUT,/opportunities/{opportunity_id},opportunity_id,integer,path,ID of the opportunity entity.
+Opportunities,PUT,/opportunities/{opportunity_id},name,string,payload (optional),Name of the object being created or updated.
+Opportunities,DELETE,/opportunities/{opportunity_id},opportunity_id,integer,path,ID of the opportunity entity.
+Interactions,GET,/interactions,person_id,integer,query (optional),ID of the person entity.
+Interactions,GET,/interactions,organization_id,integer,query (optional),ID of the organization entity.
+Interactions,GET,/interactions,opportunity_id,integer,query (optional),ID of the opportunity entity.
+Interactions,GET,/interactions,list_entry_id,integer,query (optional),ID of the specific list entry.
+Interactions,GET,/interactions/{id}?type={type},id,integer,path,
+Interactions,GET,/interactions/{id}?type={type},type,string,query,"Type of the list (e.g., People = 0, Organizations = 1, Opportunities = 2)."
+Interactions,POST,/interactions,interaction_type,string,payload,"Type of interaction (e.g., email, meeting)."
+Interactions,POST,/interactions,subject,string,payload,Subject line or title of the interaction.
+Interactions,POST,/interactions,date,string,payload,Date of the interaction (ISO 8601 format).
+Interactions,POST,/interactions,notes,string,payload (optional),Free-text notes associated with the interaction.
+Interactions,POST,/interactions,creator_id,integer,payload,ID of the user creating the resource.
+Interactions,POST,/interactions,participants,array,payload,List of participant person IDs involved in the interaction.
+Interactions,POST,/interactions,entity_id,integer,payload,"ID of the entity (person, organization, etc.) associated with the resource."
+Interactions,POST,/interactions,entity_type,string,payload,Type of entity the resource is associated with.
+Notes,GET,/notes,entity_id,integer,query,"ID of the entity (person, organization, etc.) associated with the resource."
+Notes,GET,/notes,entity_type,string,query,Type of entity the resource is associated with.
+Notes,POST,/notes,note,string,payload,Free-text note content.
+Notes,POST,/notes,creator_id,integer,payload,ID of the user creating the resource.
+Notes,POST,/notes,entity_id,integer,payload,"ID of the entity (person, organization, etc.) associated with the resource."
+Notes,POST,/notes,entity_type,string,payload,Type of entity the resource is associated with.
+Notes,PUT,/notes/{note_id},note_id,integer,path,ID of the specific note.
+Notes,PUT,/notes/{note_id},note,string,payload (optional),Free-text note content.
+Notes,DELETE,/notes/{note_id},note_id,integer,path,ID of the specific note.
+Webhooks,POST,/webhook/subscribe,url,string,payload,Target URL for webhook delivery.
+Webhooks,POST,/webhook/subscribe,event,string,payload,Event name that triggers the webhook.
+Webhooks,GET,/webhook,,,,
+Webhooks,GET,/webhook/{webhook_subscription_id},webhook_subscription_id,string,path,ID of the webhook subscription.
+Webhooks,PUT,/webhook/{webhook_subscription_id},webhook_subscription_id,string,path,ID of the webhook subscription.
+Webhooks,PUT,/webhook/{webhook_subscription_id},url,string,payload (optional),Target URL for webhook delivery.
+Webhooks,PUT,/webhook/{webhook_subscription_id},event,string,payload (optional),Event name that triggers the webhook.
+Webhooks,DELETE,/webhook/{webhook_subscription_id},webhook_subscription_id,string,path,ID of the webhook subscription.
+Whoami,GET,/auth/whoami,,,,
+Rate Limits,GET,/rate-limit,,,,

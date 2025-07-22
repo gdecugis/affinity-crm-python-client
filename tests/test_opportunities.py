@@ -122,35 +122,7 @@ def test_list_opportunities_with_multiple_filters():
     assert "opportunities" in result
     assert len(result["opportunities"]) == 1
 
-@responses.activate
-def test_search_opportunities():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/opportunities?page_size=50&term=series",
-        json={"opportunities": [{"id": 456, "name": "Series A Investment", "stage": "Due Diligence"}]},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.search_opportunities("series")
-    assert "opportunities" in result
-    assert len(result["opportunities"]) == 1
-    assert result["opportunities"][0]["id"] == 456
-    assert result["opportunities"][0]["name"] == "Series A Investment"
-    assert result["opportunities"][0]["stage"] == "Due Diligence"
 
-@responses.activate
-def test_search_opportunities_with_filters():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/opportunities?page_size=50&term=series&list_id=456&organization_id=789",
-        json={"opportunities": [{"id": 456, "name": "Series A Investment", "stage": "Due Diligence"}]},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.search_opportunities("series", list_id=456, organization_id=789)
-    assert "opportunities" in result
-    assert len(result["opportunities"]) == 1
-    assert result["opportunities"][0]["id"] == 456
 
 @responses.activate
 def test_list_all_opportunities():

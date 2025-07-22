@@ -54,7 +54,7 @@ def check_organization_exists(domain):
     print(f"🔍 Checking if organization exists for domain: {domain}")
     
     try:
-        result = client.search_organizations(domain)
+        result = client.list_organizations(term=domain)
         organizations = result.get("organizations", [])
         
         if organizations:
@@ -69,6 +69,8 @@ def check_organization_exists(domain):
         print(f"❌ Error searching for organization: {e}")
         return None
 
+
+
 def create_organization(domain):
     """Create a new organization for the given domain."""
     print(f"🏗️  Creating new organization for domain: {domain}")
@@ -82,7 +84,7 @@ def create_organization(domain):
     }
     
     try:
-        new_org = client.create_organization(org_data)
+        new_org = client.create_organization(name=company_name, domain=domain)
         print(f"✅ Created organization: {new_org['name']} (ID: {new_org['id']})")
         return new_org
     except Exception as e:
@@ -92,13 +94,8 @@ def create_organization(domain):
 def add_organization_to_list(org_id, list_id):
     print(f"📋 Adding organization {org_id} to list {list_id}")
     
-    list_entry_data = {
-        "entity_id": org_id,
-        "entity_type": "organization"
-    }
-    
     try:
-        result = client.add_list_entry(list_id, list_entry_data)
+        result = client.add_list_entry(list_id, entity_id=org_id)
         print(f"✅ Added organization to list (Entry ID: {result['id']})")
         return result
     except Exception as e:
@@ -110,16 +107,13 @@ def create_opportunity_with_fields(org_id, org_name, list_id):
     print(f"💼 Creating opportunity for organization: {org_name}")
     
     # Step 1: Create basic opportunity (no custom fields yet)
-    opportunity_data = {
-        "name": f"API Test Opportunity - {org_name}",
-        "organization_ids": [int(org_id)],  # API expects array of organization IDs
-        "list_id": int(list_id),  # Ensure it's an integer
-        "stage": "Qualified"  # Basic stage
-    }
-
     try:
         # Step 1: Create the opportunity
-        new_opportunity = client.create_opportunity(opportunity_data)
+        new_opportunity = client.create_opportunity(
+            name=f"API Test Opportunity - {org_name}",
+            list_id=list_id,
+            organization_ids=[org_id]
+        )
         opportunity_id = new_opportunity['id']
         print(f"✅ Created opportunity: {new_opportunity['name']} (ID: {opportunity_id})")
         
@@ -133,6 +127,7 @@ def create_opportunity_with_fields(org_id, org_name, list_id):
         
         for field_name, config in FIELD_CONFIG.items():
             try:
+                print(config["field_id"], config["value"], opportunity_id, list_entry_id)
                 result = client.set_field_value(
                     field_id=config["field_id"],
                     value=config["value"],

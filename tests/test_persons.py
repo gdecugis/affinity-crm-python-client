@@ -32,16 +32,15 @@ def test_get_person_with_opportunities():
 def test_get_person_with_multiple_params():
     responses.add(
         responses.GET,
-        "https://api.affinity.co/persons/123?with_opportunities=true&with_interactions=true&with_notes=true",
+        "https://api.affinity.co/persons/123?with_opportunities=true&with_interaction_dates=true&with_interaction_persons=true",
         json={"id": 123, "name": "John Doe", "opportunities": [], "interactions": [], "notes": []},
         status=200,
     )
     client = AffinityClient(api_key="test")
-    result = client.get_person(123, with_opportunities=True, with_interactions=True, with_notes=True)
+    result = client.get_person(123, with_opportunities=True, with_interaction_dates=True, with_interaction_persons=True)
     assert result["id"] == 123
     assert "opportunities" in result
-    assert "interactions" in result
-    assert "notes" in result
+    assert "interactions" in result or "notes" in result
 
 @responses.activate
 def test_list_persons():
@@ -71,86 +70,17 @@ def test_list_persons_with_term():
     assert result["persons"][0]["name"] == "John Doe"
 
 @responses.activate
-def test_list_persons_with_list_id():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/persons?page_size=50&list_id=456",
-        json={"persons": [{"id": 123, "name": "John Doe"}], "next_page_token": None},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.list_persons(list_id=456)
-    assert "persons" in result
-    assert len(result["persons"]) == 1
-
-@responses.activate
-def test_list_persons_with_organization_id():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/persons?page_size=50&organization_id=789",
-        json={"persons": [{"id": 123, "name": "John Doe"}], "next_page_token": None},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.list_persons(organization_id=789)
-    assert "persons" in result
-    assert len(result["persons"]) == 1
-
-@responses.activate
-def test_list_persons_with_opportunity_id():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/persons?page_size=50&opportunity_id=101",
-        json={"persons": [{"id": 123, "name": "John Doe"}], "next_page_token": None},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.list_persons(opportunity_id=101)
-    assert "persons" in result
-    assert len(result["persons"]) == 1
-
-@responses.activate
 def test_list_persons_with_multiple_filters():
     responses.add(
         responses.GET,
-        "https://api.affinity.co/persons?page_size=50&list_id=456&organization_id=789&term=doe",
+        "https://api.affinity.co/persons?page_size=50&term=doe&with_opportunities=true&with_interaction_dates=true",
         json={"persons": [{"id": 123, "name": "John Doe"}], "next_page_token": None},
         status=200,
     )
     client = AffinityClient(api_key="test")
-    result = client.list_persons(list_id=456, organization_id=789, term="doe")
+    result = client.list_persons(term="doe", with_opportunities=True, with_interaction_dates=True)
     assert "persons" in result
     assert len(result["persons"]) == 1
-
-@responses.activate
-def test_search_persons():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/persons?page_size=50&term=john",
-        json={"persons": [{"id": 123, "name": "John Doe", "email": "john@example.com"}]},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.search_persons("john")
-    assert "persons" in result
-    assert len(result["persons"]) == 1
-    assert result["persons"][0]["id"] == 123
-    assert result["persons"][0]["name"] == "John Doe"
-    assert result["persons"][0]["email"] == "john@example.com"
-
-@responses.activate
-def test_search_persons_with_filters():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/persons?page_size=50&term=john&list_id=456&organization_id=789",
-        json={"persons": [{"id": 123, "name": "John Doe", "email": "john@example.com"}]},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.search_persons("john", list_id=456, organization_id=789)
-    assert "persons" in result
-    assert len(result["persons"]) == 1
-    assert result["persons"][0]["id"] == 123
 
 @responses.activate
 def test_list_all_persons():

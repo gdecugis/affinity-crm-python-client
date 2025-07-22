@@ -140,35 +140,7 @@ def test_list_organizations_with_multiple_filters():
     assert "organizations" in result
     assert len(result["organizations"]) == 1
 
-@responses.activate
-def test_search_organizations():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/organizations?page_size=50&term=example.com",
-        json={"organizations": [{"id": 123, "name": "Example Corp", "domain": "example.com"}]},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.search_organizations("example.com")
-    assert "organizations" in result
-    assert len(result["organizations"]) == 1
-    assert result["organizations"][0]["id"] == 123
-    assert result["organizations"][0]["name"] == "Example Corp"
-    assert result["organizations"][0]["domain"] == "example.com"
 
-@responses.activate
-def test_search_organizations_with_filters():
-    responses.add(
-        responses.GET,
-        "https://api.affinity.co/organizations?page_size=50&term=example.com&list_id=456&person_id=789",
-        json={"organizations": [{"id": 123, "name": "Example Corp", "domain": "example.com"}]},
-        status=200,
-    )
-    client = AffinityClient(api_key="test")
-    result = client.search_organizations("example.com", list_id=456, person_id=789)
-    assert "organizations" in result
-    assert len(result["organizations"]) == 1
-    assert result["organizations"][0]["id"] == 123
 
 @responses.activate
 def test_list_all_organizations():

@@ -10,4 +10,4 @@ __pycache__
 *.pyzw
 *.pyzwz
 
-sample_affinity_fields.json
+/examples/sample_affinity_fields.json

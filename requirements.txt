@@ -1,3 +1,5 @@
 pytest 
 responses
 python-dotenv
+pydantic
+pydantic[email]

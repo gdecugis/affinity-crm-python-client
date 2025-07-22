@@ -1,4 +1,5 @@
 import responses
+import pytest
 from affinity.client import AffinityClient
 
 @responses.activate
@@ -10,9 +11,34 @@ def test_create_person():
         status=200,
     )
     client = AffinityClient(api_key="test")
-    result = client.create_person({"name": "New Person"})
+    result = client.create_person(
+        first_name="New",
+        last_name="Person",
+        emails=["new.person@example.com"],
+        organization_ids=[123, 456]
+    )
     assert result["id"] == 321
     assert result["name"] == "New Person"
+
+@responses.activate
+def test_create_person_validation_error():
+    client = AffinityClient(api_key="test")
+    # Missing required parameter 'emails'
+    with pytest.raises(ValueError) as excinfo:
+        client.create_person(
+            first_name="New",
+            last_name="Person",
+            emails=None
+        )
+    assert "Parameter validation error" in str(excinfo.value)
+    # Wrong type for emails
+    with pytest.raises(ValueError) as excinfo:
+        client.create_person(
+            first_name="New",
+            last_name="Person",
+            emails="not-an-email-list"
+        )
+    assert "Parameter validation error" in str(excinfo.value)
 
 @responses.activate
 def test_update_person():
@@ -23,7 +49,7 @@ def test_update_person():
         status=200,
     )
     client = AffinityClient(api_key="test")
-    result = client.update_person(321, {"name": "Updated Person"})
+    result = client.update_person(321, first_name="Updated", last_name="Person", emails=["updated.person@example.com"], organization_ids=[789])
     assert result["id"] == 321
     assert result["name"] == "Updated Person"
 

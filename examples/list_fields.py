@@ -26,6 +26,9 @@ try:
         print(f"📊 Found {len(fields)} fields for list {LIST_ID}:")
         print()
         
+        # Track dropdown fields for detailed analysis
+        dropdown_fields = []
+        
         for i, field in enumerate(fields, 1):
             field_id = field.get("id")
             field_name = field.get("name", "Unnamed Field")
@@ -41,7 +44,8 @@ try:
             if field_type == "dropdown":
                 options = field.get("dropdown_options", [])
                 if options:
-                    print(f"      📋 Options: {', '.join(options)}")
+                    print(f"      📋 Options: {len(options)} dropdown options available")
+                    dropdown_fields.append(field)
                 else:
                     print(f"      📋 Options: None")
             elif field_type == "number":
@@ -52,56 +56,36 @@ try:
             
             print()
         
-        # Get all possible values for the first field using the correct approach
-        if fields:
-            first_field = fields[0]
-            first_field_id = first_field.get("id")
-            first_field_name = first_field.get("name", "Unnamed Field")
+        # Now show detailed dropdown options for all dropdown fields
+        if dropdown_fields:
+            print(f"🔍 Detailed dropdown options for {len(dropdown_fields)} dropdown fields:")
+            print("=" * 80)
             
-            print(f"🔍 Getting all possible values for the first field: {first_field_name} (ID: {first_field_id})")
-            print()
-            
-            try:
-                # Get field values using the correct endpoint with list_id parameter
-                field_values_response = client.list_fields(list_id=LIST_ID)
+            for field in dropdown_fields:
+                field_id = field.get("id")
+                field_name = field.get("name", "Unnamed Field")
+                dropdown_options = field.get("dropdown_options", [])
                 
-                # The response is a direct array of fields, not wrapped in "fields"
-                if field_values_response and isinstance(field_values_response, list):
-                    # Find the first field in the response and get its dropdown options
-                    for field_data in field_values_response:
-                        if field_data.get("id") == first_field_id:
-                            dropdown_options = field_data.get("dropdown_options", [])
-                            
-                            if dropdown_options:
-                                print(f"📋 Found {len(dropdown_options)} possible values for field '{first_field_name}':")
-                                print()
-                                
-                                for i, option in enumerate(dropdown_options, 1):
-                                    option_id = option.get("id")
-                                    option_text = option.get("text", "No text")
-                                    option_rank = option.get("rank", "No rank")
-                                    option_color = option.get("color", "No color")
-                                    
-                                    print(f"   {i}. {option_text}")
-                                    print(f"      🆔 Option ID: {option_id}")
-                                    print(f"      📊 Rank: {option_rank}")
-                                    print(f"      🎨 Color: {option_color}")
-                                    print()
-                            else:
-                                print(f"📝 No dropdown options found for field '{first_field_name}'")
-                                print("   This field might not be a dropdown type or has no options defined")
-                            break
-                    else:
-                        print(f"❌ Could not find field {first_field_id} in the response")
-                else:
-                    print(f"📝 No field data received for list {LIST_ID}")
+                print(f"📋 Field: {field_name} (ID: {field_id})")
+                print(f"   📊 {len(dropdown_options)} options available:")
+                print()
+                
+                for i, option in enumerate(dropdown_options, 1):
+                    option_id = option.get("id")
+                    option_text = option.get("text", "No text")
+                    option_rank = option.get("rank", "No rank")
+                    option_color = option.get("color", "No color")
                     
-            except Exception as e:
-                print(f"❌ Error retrieving values for field '{first_field_name}': {e}")
-                print("   This might be because:")
-                print("   - The field doesn't have any dropdown options")
-                print("   - The field type doesn't support dropdown options")
-                print("   - API permissions issue")
+                    print(f"   {i}. {option_text}")
+                    print(f"      🆔 Option ID: {option_id}")
+                    print(f"      📊 Rank: {option_rank}")
+                    print(f"      🎨 Color: {option_color}")
+                    print()
+                
+                print("-" * 80)
+        else:
+            print("📝 No dropdown fields found in this list")
+            
     else:
         print(f"📝 No fields found for list {LIST_ID}")
         print("   This could mean:")
