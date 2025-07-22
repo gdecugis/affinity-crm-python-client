@@ -1,6 +1,9 @@
+LICENSE
+README.md
 setup.py
 affinity/__init__.py
 affinity/client.py
+affinity/models.py
 affinity_crm_python_client.egg-info/PKG-INFO
 affinity_crm_python_client.egg-info/SOURCES.txt
 affinity_crm_python_client.egg-info/dependency_links.txt
@@ -8,7 +11,15 @@ affinity_crm_python_client.egg-info/requires.txt
 affinity_crm_python_client.egg-info/top_level.txt
 tests/test_auth.py
 tests/test_fields.py
+tests/test_interactions.py
+tests/test_list_entries_write.py
 tests/test_lists.py
+tests/test_notes.py
 tests/test_opportunities.py
+tests/test_opportunities_write.py
 tests/test_organizations.py
+tests/test_organizations_write.py
 tests/test_persons.py
+tests/test_persons_write.py
+tests/test_utility.py
+tests/test_webhooks.py
