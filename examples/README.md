@@ -25,7 +25,7 @@ This directory contains example scripts demonstrating how to use the Affinity CR
 ### opportunities_for_domain.py
 
 This script demonstrates how to:
-- Search for organizations by domain name using Affinity's search API
+- Search for organizations by domain name using Affinity's list API
 - Find opportunities associated with those organizations
 
 #### Usage
@@ -36,7 +36,7 @@ python examples/opportunities_for_domain.py
 
 #### How it works
 
-1. **Domain Search**: Uses `client.search_organizations(domain)` to efficiently search for organizations by domain
+1. **Domain Search**: Uses `client.list_organizations(term=domain)` to efficiently search for organizations by domain
 2. **Opportunity Retrieval**: For matching organizations, searches for opportunities by organization name and filters by `organization_ids`
 
 #### Example Output
@@ -133,7 +133,7 @@ python examples/create_opportunity_workflow.py
 
 #### How it works
 
-1. **Organization Check**: Uses `client.search_organizations(domain)` to check if an organization exists for the target domain
+1. **Organization Check**: Uses `client.list_organizations(term=domain)` to check if an organization exists for the target domain
 2. **Organization Creation**: If not found, creates a new organization using `client.create_organization()` with domain and name
 3. **List Assignment**: Adds the organization to the target list using `client.add_list_entry()`
 4. **Opportunity Creation**: Creates a new opportunity using `client.create_opportunity()` with basic information

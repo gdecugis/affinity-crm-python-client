@@ -12,7 +12,7 @@ client = AffinityClient(api_key=API_KEY)
 
 print(f"🔍 Searching for organizations with domain: {TARGET_DOMAIN}")
 try:
-    result = client.search_organizations(TARGET_DOMAIN)
+    result = client.list_organizations(term=TARGET_DOMAIN)
     organizations = result.get("organizations", [])
     
     if organizations:
