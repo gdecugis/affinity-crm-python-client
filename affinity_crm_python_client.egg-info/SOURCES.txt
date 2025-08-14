@@ -21,5 +21,6 @@ tests/test_organizations.py
 tests/test_organizations_write.py
 tests/test_persons.py
 tests/test_persons_write.py
+tests/test_robust_field_values.py
 tests/test_utility.py
 tests/test_webhooks.py

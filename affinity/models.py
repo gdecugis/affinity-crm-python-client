@@ -111,6 +111,7 @@ class CreateFieldParams(BaseModel):
 
 class ListFieldValuesParams(BaseModel):
     field_values_query_id: int
+    entity_type: Optional[int] = None  # 0=person, 1=organization, 8=opportunity
     field_id: Optional[int] = None
     page_size: Optional[int] = None
     page_token: Optional[str] = None
@@ -118,6 +119,7 @@ class ListFieldValuesParams(BaseModel):
 class ListFieldValueChangesParams(BaseModel):
     field_id: int
     field_value_changes_query_id: int
+    entity_type: Optional[int] = None  # 0=person, 1=organization, 8=opportunity
     action_type: Optional[int] = None
 
 class CreateFieldValueParams(BaseModel):

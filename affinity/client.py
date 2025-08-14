@@ -372,12 +372,13 @@ class AffinityClient:
     def get_field(self, field_id: int):
         return self._request("GET", f"/fields/{field_id}")
 
-    def list_field_values(self, field_values_query_id: int, field_id: int = None, page_size: int = None, page_token: str = None):
+    def list_field_values(self, field_values_query_id: int, entity_type: int = None, field_id: int = None, page_size: int = None, page_token: str = None):
         """
         List field values for a specific entity.
         
         Args:
             field_values_query_id: The ID of the entity (person_id, organization_id, opportunity_id, or list_entry_id)
+            entity_type: Optional entity type (0=person, 1=organization, 8=opportunity). If provided, takes precedence over auto-detection.
             field_id: Optional field ID to filter by
             page_size: Number of results per page
             page_token: Token for pagination
@@ -385,6 +386,7 @@ class AffinityClient:
         try:
             params = ListFieldValuesParams(
                 field_values_query_id=field_values_query_id,
+                entity_type=entity_type,
                 field_id=field_id,
                 page_size=page_size,
                 page_token=page_token
@@ -395,28 +397,55 @@ class AffinityClient:
         # Convert the abstract parameter to the appropriate API parameter
         api_params = params.model_dump(exclude_none=True)
         query_id = api_params.pop('field_values_query_id')
+        entity_type = api_params.pop('entity_type', None)
         
-        # The API expects one of these parameters, so we'll try them in order
-        # This is a bit of a hack, but it's the simplest way to handle the API requirement
-        for param_name in ['person_id', 'organization_id', 'opportunity_id', 'list_entry_id']:
-            api_params[param_name] = query_id
-            break  # Just use the first one - the API will validate if it's correct
+        # Define entity type mappings
+        entity_type_mappings = {
+            0: 'person_id',
+            1: 'organization_id', 
+            8: 'opportunity_id'
+        }
         
-        return self._request("GET", "/field-values", params=api_params)
+        # If entity_type is explicitly provided, use it
+        if entity_type is not None:
+            if entity_type in entity_type_mappings:
+                param_name = entity_type_mappings[entity_type]
+                api_params[param_name] = query_id
+                return self._request("GET", "/field-values", params=api_params)
+            else:
+                raise ValueError(f"Invalid entity_type: {entity_type}. Must be 0 (person), 1 (organization), or 8 (opportunity)")
+        
+        # Otherwise, try each parameter type until one works
+        param_names = ['person_id', 'organization_id', 'opportunity_id', 'list_entry_id']
+        last_error = None
+        
+        for param_name in param_names:
+            try:
+                test_params = api_params.copy()
+                test_params[param_name] = query_id
+                return self._request("GET", "/field-values", params=test_params)
+            except Exception as e:
+                last_error = e
+                continue
+        
+        # If none of the parameter types worked, raise the last error
+        raise Exception(f"Could not determine entity type for ID {query_id}. Tried all entity types but none worked. Last error: {last_error}")
 
-    def list_field_value_changes(self, field_id: int, field_value_changes_query_id: int, action_type: int = None):
+    def list_field_value_changes(self, field_id: int, field_value_changes_query_id: int, entity_type: int = None, action_type: int = None):
         """
         List field value changes for a specific entity.
         
         Args:
             field_id: The ID of the field to get changes for
             field_value_changes_query_id: The ID of the entity (person_id, organization_id, opportunity_id, or list_entry_id)
+            entity_type: Optional entity type (0=person, 1=organization, 8=opportunity). If provided, takes precedence over auto-detection.
             action_type: Optional action type filter (e.g., 1 = added, 2 = removed)
         """
         try:
             params = ListFieldValueChangesParams(
                 field_id=field_id,
                 field_value_changes_query_id=field_value_changes_query_id,
+                entity_type=entity_type,
                 action_type=action_type
             )
         except ValidationError as e:
@@ -425,13 +454,39 @@ class AffinityClient:
         # Convert the abstract parameter to the appropriate API parameter
         api_params = params.model_dump(exclude_none=True)
         query_id = api_params.pop('field_value_changes_query_id')
+        entity_type = api_params.pop('entity_type', None)
         
-        # The API expects one of these parameters, so we'll try them in order
-        for param_name in ['person_id', 'organization_id', 'opportunity_id', 'list_entry_id']:
-            api_params[param_name] = query_id
-            break  # Just use the first one - the API will validate if it's correct
+        # Define entity type mappings
+        entity_type_mappings = {
+            0: 'person_id',
+            1: 'organization_id', 
+            8: 'opportunity_id'
+        }
         
-        return self._request("GET", "/field-value-changes", params=api_params)
+        # If entity_type is explicitly provided, use it
+        if entity_type is not None:
+            if entity_type in entity_type_mappings:
+                param_name = entity_type_mappings[entity_type]
+                api_params[param_name] = query_id
+                return self._request("GET", "/field-value-changes", params=api_params)
+            else:
+                raise ValueError(f"Invalid entity_type: {entity_type}. Must be 0 (person), 1 (organization), or 8 (opportunity)")
+        
+        # Otherwise, try each parameter type until one works
+        param_names = ['person_id', 'organization_id', 'opportunity_id', 'list_entry_id']
+        last_error = None
+        
+        for param_name in param_names:
+            try:
+                test_params = api_params.copy()
+                test_params[param_name] = query_id
+                return self._request("GET", "/field-value-changes", params=test_params)
+            except Exception as e:
+                last_error = e
+                continue
+        
+        # If none of the parameter types worked, raise the last error
+        raise Exception(f"Could not determine entity type for ID {query_id}. Tried all entity types but none worked. Last error: {last_error}")
 
     # ---------- Notes ----------
 
@@ -574,7 +629,7 @@ class AffinityClient:
 
     # ---------- Wrappers & Added functions ----------
 
-    def set_field_value(self, field_id, value, entity_id, list_entry_id=None):
+    def set_field_value(self, field_id, value, entity_id, entity_type: int = None, list_entry_id=None):
         """
         Smart method that either creates or updates a field value.
         First checks if a field value exists, then creates or updates accordingly.
@@ -582,11 +637,12 @@ class AffinityClient:
             field_id: The field ID
             value: The field value
             entity_id: The entity ID
+            entity_type: Optional entity type (0=person, 1=organization, 8=opportunity). If provided, takes precedence over auto-detection.
             list_entry_id: The list entry ID (optional but often required)
         """
         # First, try to get existing field values for this entity and field
         try:
-            field_values = self.list_field_values(entity_id, field_id=field_id)
+            field_values = self.list_field_values(entity_id, entity_type=entity_type, field_id=field_id)
             existing_values = field_values.get("field_values", [])
             
             if existing_values:
